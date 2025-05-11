@@ -45,7 +45,7 @@ export default class Cover {
     this.texture = scene.textureLoader.load(src);
 
     // donner la texture au material
-    // this.material.map = this.texture;
+    this.material.map = this.texture;
 
     console.log(this.material.uniforms);
     this.material.uniforms.uMap.value = this.texture;

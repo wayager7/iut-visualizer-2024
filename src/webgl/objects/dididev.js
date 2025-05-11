@@ -11,8 +11,6 @@ export default class Head {
     this.planete3 = null;
     this.planete4 = null;
     this.planete4x = null;
-    this.verresref = null;
-
 
     scene.gltfLoader.load("/models/dididev.glb", (gltf) => {
       this.group = gltf.scene;
@@ -39,28 +37,10 @@ export default class Head {
       this.planete4 = this.group.getObjectByName("planete4");
       this.planete4x = this.group.getObjectByName("planete4x");
 
-      // Récupérer verresref
-      this.verresref = this.group.getObjectByName("verresref");
-
       // this.group.rotation.x = Math.PI / 2;
     });
   }
 
-  setCover(src) {
-      // charger la texture
-      this.texture = scene.textureLoader.load(src);
-
-      // donner la texture au material
-      this.verresref.map = this.texture;
-
-      console.log(this.verresref.uniforms);
-      this.verresref.uniforms.uMap.value = this.texture;
-
-      // force la recompilation du material
-      this.verresref.needsUpdate = true;
-
-      console.log(this.texture);
-    }
 
   update() {
     const bpm = audioController.bpm || 2; // Valeur par déf
@@ -69,9 +49,6 @@ export default class Head {
     const scaleFactor = 0.1 + 0.02 * Math.sin(2 * Math.PI * beatsPerSecond * time); // Calculer compliqué d'une oscillation basée sur le BPM
     const scaleFactorx = 0.3 + 0.02 * Math.sin(2 * Math.PI * beatsPerSecond * time); // Calculer compliqué d'une oscillation basée sur le BPM
     const remappedFrequency = audioController.fdata[0] / 255; // Valeur entre 0 et 1
-
-
-
 
 
     if (this.planete1 && this.planete1.material) {
@@ -89,8 +66,6 @@ export default class Head {
       // Ajuster l'intensité de l'émission
       this.planete3.material.emissiveIntensity = 1 + remappedFrequency * 20.0;
     }
-
-
 
 
     //planete1 rotation
